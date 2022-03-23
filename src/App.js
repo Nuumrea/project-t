@@ -43,7 +43,7 @@ const App = () => {
                 <span>{data}</span>
               </div>
               <div>
-                <img src={Trash} />
+                <img src={Trash} alt="trash png" />
               </div>
             </div>
           );
