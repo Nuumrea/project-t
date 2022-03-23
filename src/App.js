@@ -1,17 +1,54 @@
+import React, { useState } from "react";
 import "./App.css";
-import YtEmbed from "./components/ytEmbed/index";
+import Trash from "./assets/trash.png";
 
 const App = () => {
+  const [value, setValue] = useState("");
+  const [todos, setTodos] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addTodo(value);
+    setValue("");
+  };
+
+  const addTodo = (text) => {
+    const newTodos = [...todos, text];
+    setTodos(newTodos);
+  };
+
   return (
-    <div className="app">
-      <div>
-        <span>
-          Lost Ark new class : Artist <br />
-          Release Soon
-          <p>Source : Trust me bro</p>
-        </span>
+    <div className="wrapper">
+      <div className="title">
+        <span>Todo List</span>
       </div>
-      <YtEmbed embedId="wl0q0xi10Ng" />
+      <form onSubmit={handleSubmit} className="input-wrapper">
+        <input
+          className="input-field"
+          type="text"
+          placeholder="Veuillez renseigner une nouvelle tâche"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          required
+        />
+        <input className="input-button" type="submit" value="Ajouter" />
+      </form>
+
+      <div>
+        {todos.map((data, index) => {
+          return (
+            <div className="text-wrapper">
+              <div>
+                <input type="checkbox" />
+                <span>{data}</span>
+              </div>
+              <div>
+                <img src={Trash} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
